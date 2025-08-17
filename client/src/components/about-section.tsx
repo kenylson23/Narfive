@@ -2,9 +2,9 @@ import { motion } from "framer-motion";
 
 export default function AboutSection() {
   const stats = [
-    { number: "25+", label: "Anos de Experiência" },
+    { number: "8+", label: "Anos de Experiência" },
     { number: "1500+", label: "Estudantes Ativos" },
-    { number: "80+", label: "Professores Qualificados" },
+    { number: "30+", label: "Professores Qualificados" },
     { number: "5000+", label: "Graduados" }
   ];
 
@@ -38,7 +38,7 @@ export default function AboutSection() {
               Sobre o <span className="text-primary">Narfive</span>
             </h2>
             <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-              O Colégio Narfive é uma instituição de ensino de prestígio em Angola, dedicada a formar cidadãos íntegros e preparados para os desafios do século XXI. Com mais de duas décadas de excelência educacional, somos reconhecidos pela qualidade do nosso ensino e pelo desenvolvimento integral dos nossos estudantes.
+              O Colégio Narfive é uma instituição de ensino de prestígio em Angola, dedicada a formar cidadãos íntegros e preparados para os desafios do século XXI. Com 10 anos de excelência educacional, somos reconhecidos pela qualidade do nosso ensino e pelo desenvolvimento integral dos nossos estudantes.
             </p>
             <p className="text-lg text-gray-700 mb-8 leading-relaxed">
               Nossa missão é proporcionar uma educação holística que combina rigor acadêmico, valores éticos e desenvolvimento das competências do futuro, preparando nossos alunos para se tornarem líderes em suas comunidades e no mundo.
@@ -94,9 +94,9 @@ export default function AboutSection() {
           >
             <div className="relative">
               <motion.img 
-                src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" 
-                alt="Colégio Narfive Campus" 
-                className="rounded-2xl shadow-2xl w-full h-auto section-transition"
+                src="/images/instalacoes.jpg" 
+                alt="Instalações do Colégio Narfive" 
+                className="rounded-2xl shadow-2xl w-full h-auto section-transition object-cover"
                 whileHover={{ 
                   scale: 1.05,
                   rotateY: 5,

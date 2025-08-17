@@ -11,81 +11,81 @@ export default function GallerySection() {
     { id: "campus", name: "Campus" },
     { id: "students", name: "Estudantes" },
     { id: "events", name: "Eventos" },
-    { id: "facilities", name: "Instalações" }
+    { id: "Fraternidade", name: "Fraternidade" }
   ];
 
   const images = [
     {
       id: 1,
-      src: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-      alt: "Campus Principal",
+      src: "/images/acampamento3.jpg",
+      alt: "Acampamento Escolar 1",
       category: "campus",
-      title: "Campus Principal",
-      description: "Vista do edifício principal do Colégio Narfive"
+      title: "Acampamento Escolar",
+      description: "Atividades ao ar livre no nosso acampamento"
     },
     {
       id: 2,
-      src: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-      alt: "Cerimónia de Graduação",
+      src: "/images/desporto1.jpg",
+      alt: "Competição Desportiva",
       category: "events",
-      title: "Cerimónia de Graduação 2024",
-      description: "Momento especial da formatura dos nossos alunos"
+      title: "Competição Desportiva",
+      description: "Estudantes participando de competições escolares"
     },
     {
       id: 3,
-      src: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-      alt: "Atividades Desportivas",
+      src: "/images/estudantes.jpg",
+      alt: "Estudantes em Aula",
       category: "students",
-      title: "Atividades Desportivas",
-      description: "Estudantes participando em competições desportivas"
+      title: "Estudantes em Aula",
+      description: "Aprendizado ativo e colaborativo em sala de aula"
     },
     {
       id: 4,
-      src: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-      alt: "Biblioteca Moderna",
-      category: "facilities",
-      title: "Biblioteca Digital",
-      description: "Espaço moderno de estudo e pesquisa"
+      src: "/images/infa3.jpg",
+      alt: "Momentos de Fraternidade",
+      category: "Fraternidade",
+      title: "Momentos de Fraternidade",
+      description: "Compartilhando experiências e laços especiais"
     },
     {
       id: 5,
-      src: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-      alt: "Laboratório de Ciências",
-      category: "facilities",
-      title: "Laboratório de Ciências",
-      description: "Equipamentos modernos para experimentação"
+      src: "/images/jornada5.jpg",
+      alt: "Jornada de Convivência",
+      category: "Fraternidade",
+      title: "Jornada de Convivência",
+      description: "Construindo memórias e amizades duradouras"
     },
     {
       id: 6,
-      src: "https://images.unsplash.com/photo-1504609773096-104ff2c73ba4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-      alt: "Festival Cultural",
+      src: "/images/estudantes3.jpg",
+      alt: "Atividade em Grupo",
       category: "events",
-      title: "Festival Cultural Anual",
-      description: "Celebração da diversidade cultural angolana"
+      title: "Atividade em Grupo",
+      description: "Estudantes participando de atividades extracurriculares"
     },
     {
       id: 7,
-      src: "https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-      alt: "Sala de Aula Interativa",
-      category: "facilities",
-      title: "Salas de Aula Modernas",
-      description: "Ambiente tecnológico para aprendizagem"
+      src: "/images/dg2.jpg",
+      alt: "Encontro de Gerações",
+      category: "Fraternidade",
+      title: "Encontro de Gerações",
+      description: "Compartilhando sabedoria e experiências"
     },
     {
       id: 8,
-      src: "https://images.unsplash.com/photo-1544717297-fa95b6ee9643?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-      alt: "Estudantes em Ação",
+      src: "/images/jornada2.jpg",
+      alt: "Jornada Científica",
       category: "students",
-      title: "Estudantes em Ação",
-      description: "Momentos de aprendizagem colaborativa"
+      title: "Jornada Científica",
+      description: "Apresentação de trabalhos científicos dos estudantes"
     },
     {
       id: 9,
-      src: "https://images.unsplash.com/photo-1497486751825-1233686d5d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-      alt: "Área Externa",
+      src: "/images/acampamento6.jpg",
+      alt: "Acampamento Escolar 2",
       category: "campus",
-      title: "Jardins do Campus",
-      description: "Espaços verdes para relaxamento"
+      title: "Momento de Lazer",
+      description: "Estudantes desfrutando de momentos de descontração"
     }
   ];
 

@@ -2,24 +2,24 @@ import { motion } from "framer-motion";
 
 export default function StudentLifeSection() {
   const activities = [
-    { icon: "fas fa-microscope", label: "Clube de Ciências" },
+    { icon: "fas fa-microscope", label: "Jornadas Científicas" },
     { icon: "fas fa-music", label: "Orquestra Escolar" },
-    { icon: "fas fa-chess", label: "Clube de Xadrez" },
+    { icon: "fas fa-chess", label: "Acampamentos Inter-Províncias" },
     { icon: "fas fa-theater-masks", label: "Grupo de Teatro" },
-    { icon: "fas fa-robot", label: "Robótica" },
+    { icon: "fas fa-robot", label: "Tribunal Simulado" },
     { icon: "fas fa-newspaper", label: "Jornal Escolar" }
   ];
 
   const facilities = [
     {
       icon: "fas fa-book",
-      title: "Biblioteca Digital",
-      description: "Acesso a mais de 50.000 recursos digitais e físicos"
+      title: "Portal do Aluno",
+      description: "Brevemente estará disponível Para visualização de notas,faltas,desempenho escolares.Com acesso para encarregados,alunos e professores"
     },
     {
       icon: "fas fa-flask",
-      title: "Laboratórios Científicos",
-      description: "Equipamentos modernos para física, química e biologia"
+      title: "Atividades Científicas",
+      description: "Atividades modernas para física, química e biologia"
     },
     {
       icon: "fas fa-dumbbell",
@@ -30,16 +30,16 @@ export default function StudentLifeSection() {
 
   const eventImages = [
     {
-      src: "https://images.unsplash.com/photo-1504609773096-104ff2c73ba4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
-      alt: "Festival Cultural"
+      src: "/images/solida.jpg",
+      alt: "Ação Solidária"
     },
     {
-      src: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
-      alt: "Cerimónia de Graduação"
+      src: "/images/tv.jpg",
+      alt: "Entrevista na TV"
     },
     {
-      src: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
-      alt: "Competições Desportivas"
+      src: "/images/acampamento2.jpg",
+      alt: "Acampamento Escolar"
     }
   ];
 
@@ -70,9 +70,9 @@ export default function StudentLifeSection() {
             viewport={{ once: true }}
           >
             <motion.img 
-              src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" 
-              alt="Feira de Ciências" 
-              className="rounded-2xl shadow-2xl w-full h-auto"
+              src="/images/jornada1.jpg" 
+              alt="Jornada Científica" 
+              className="rounded-2xl shadow-2xl w-full h-auto object-cover"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
             />
@@ -117,9 +117,9 @@ export default function StudentLifeSection() {
             viewport={{ once: true }}
           >
             <motion.img 
-              src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" 
-              alt="Biblioteca Moderna" 
-              className="rounded-2xl shadow-2xl w-full h-auto"
+              src="/images/desporto2.jpg" 
+              alt="Complexo Desportivo" 
+              className="rounded-2xl shadow-2xl w-full h-auto object-cover"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
             />

@@ -12,19 +12,19 @@ export default function ProgramsSection() {
       icon: "fas fa-book-open",
       title: "Ensino Secundário",
       description: "Preparação robusta para o ensino superior com ênfase em ciências, humanidades e desenvolvimento de competências do século XXI.",
-      features: ["Laboratórios Modernos", "Programa Internacional", "Orientação Vocacional"]
+      features: ["Atividades Técnicas", "Programa Internacional", "Orientação Vocacional"]
     },
     {
       icon: "fas fa-laptop-code",
       title: "Programas STEM",
       description: "Iniciativas especializadas em Ciência, Tecnologia, Engenharia e Matemática para preparar os inovadores do futuro.",
-      features: ["Robótica e Programação", "Laboratório de Inovação", "Competições Nacionais"]
+      features: ["Programação", "Competições Nacionais"]
     },
     {
       icon: "fas fa-palette",
       title: "Artes e Cultura",
       description: "Desenvolvimento da criatividade e expressão cultural através de programas integrados de artes visuais, música e teatro.",
-      features: ["Estúdio de Arte", "Orquestra Escolar", "Teatro e Drama"]
+      features: ["Grupos Artísticos", "Orquestra Escolar", "Teatro e Drama"]
     },
     {
       icon: "fas fa-running",
@@ -36,7 +36,7 @@ export default function ProgramsSection() {
       icon: "fas fa-globe-africa",
       title: "Línguas e Culturas",
       description: "Programas multilíngues que celebram a diversidade cultural angolana e preparam cidadãos globais.",
-      features: ["Português Nativo", "Inglês e Francês", "Línguas Nacionais"]
+      features: ["Português Nativo", "Inglês", "Acampamentos Inter-Províncias"]
     }
   ];
 

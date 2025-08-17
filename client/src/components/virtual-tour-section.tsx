@@ -12,7 +12,7 @@ export default function VirtualTourSection() {
       id: 1,
       name: "Entrada Principal",
       description: "Portão principal do Colégio Narfive com vista para a recepção",
-      image: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=800",
+      image: "/images/instalacoes-virtual-tour.jpg",
       hotspots: [
         { x: 30, y: 40, label: "Recepção", target: 1 },
         { x: 70, y: 60, label: "Pátio Central", target: 2 }
@@ -20,42 +20,42 @@ export default function VirtualTourSection() {
     },
     {
       id: 2,
-      name: "Biblioteca",
-      description: "Biblioteca moderna com mais de 50.000 livros e recursos digitais",
-      image: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=800",
+      name: "Refeitório",
+      description: "Espaço amplo e acolhedor para refeições dos alunos e funcionários",
+      image: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=800",
       hotspots: [
-        { x: 20, y: 30, label: "Área de Estudo", target: 3 },
-        { x: 80, y: 50, label: "Computadores", target: 4 }
+        { x: 30, y: 40, label: "Área de Servir", target: 3 },
+        { x: 70, y: 60, label: "Mesas Coletivas", target: 4 }
       ]
     },
     {
       id: 3,
-      name: "Laboratório de Ciências",
-      description: "Laboratório equipado com tecnologia moderna para experimentos",
-      image: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=800",
+      name: "Secretaria",
+      description: "Setor administrativo para atendimento aos alunos e responsáveis",
+      image: "https://images.unsplash.com/photo-1586281380118-2f9cb9d7a1b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=800",
       hotspots: [
-        { x: 40, y: 60, label: "Microscópios", target: 1 },
-        { x: 60, y: 30, label: "Bancadas", target: 2 }
+        { x: 30, y: 40, label: "Atendimento", target: 1 },
+        { x: 70, y: 60, label: "Sala de Reuniões", target: 2 }
       ]
     },
     {
       id: 4,
-      name: "Auditório",
-      description: "Espaço para apresentações e eventos com capacidade para 300 pessoas",
-      image: "https://images.unsplash.com/photo-1504609773096-104ff2c73ba4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=800",
+      name: "Salas de Aula",
+      description: "Ambientes modernos e climatizados para o aprendizado dos alunos",
+      image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=800",
       hotspots: [
-        { x: 50, y: 70, label: "Palco", target: 0 },
-        { x: 25, y: 40, label: "Entrada", target: 1 }
+        { x: 30, y: 40, label: "Quadro Digital", target: 0 },
+        { x: 70, y: 60, label: "Área de Estudo", target: 1 }
       ]
     },
     {
       id: 5,
-      name: "Pátio Central",
-      description: "Área de convivência dos estudantes com jardins e áreas de descanso",
-      image: "https://images.unsplash.com/photo-1497486751825-1233686d5d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=800",
+      name: "Complexo Desportivo",
+      description: "Estrutura completa para práticas esportivas e atividades físicas",
+      image: "https://images.unsplash.com/photo-1574629810360-7efbbe195c86?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=800",
       hotspots: [
-        { x: 35, y: 50, label: "Cantina", target: 3 },
-        { x: 65, y: 40, label: "Salas de Aula", target: 4 }
+        { x: 30, y: 40, label: "Quadra Poliesportiva", target: 3 },
+        { x: 70, y: 60, label: "Piscina Semiolímpica", target: 4 }
       ]
     }
   ];

@@ -213,7 +213,7 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
         >
-          Educação de Excelência, Formando o Futuro de Angola
+          A QUALIDADE DE ENSINO QUE O TEU FILHO MERECE, VOCÊ ENCONTRA AQUI!
         </motion.p>
         
         <motion.div 
@@ -251,6 +251,12 @@ export default function HeroSection() {
             }}
             whileTap={{ scale: 0.95 }}
             transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            onClick={() => {
+              const tourSection = document.getElementById('virtual-tour');
+              if (tourSection) {
+                tourSection.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
           >
             <motion.div 
               className="absolute inset-0 bg-gradient-to-r from-white/20 to-white/10 opacity-0"

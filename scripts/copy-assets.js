@@ -112,68 +112,69 @@ function normalizeFilename(filename) {
 // Função para copiar arquivos
 async function copyFiles() {
   try {
-    log('blue', '\n🚀 Iniciando cópia de assets...');
-    
-    // Verificar se o diretório de origem existe
-    if (!await pathExists(SOURCE_DIR)) {
-      log('yellow', `⚠️  Diretório de origem não encontrado: ${SOURCE_DIR}`);
-      log('yellow', '  Pulando cópia de assets...');
-      return true;
-    }
-
     // Garantir que o diretório de destino existe
-    if (!(await ensureDir(DEST_DIR))) {
+    await ensureDir(DEST_DIR);
+
+    // Verificar se o diretório de origem existe
+    const sourceExists = await pathExists(SOURCE_DIR);
+    if (!sourceExists) {
+      log('red', `❌ Diretório de origem não encontrado: ${SOURCE_DIR}`);
       return false;
     }
-    
-    // Limpar diretório de destino
-    log('yellow', '🔄 Limpando diretório de destino...');
+
+    // Limpar diretório de destino se já existir
     try {
       const files = await fs.readdir(DEST_DIR);
       for (const file of files) {
         await fs.unlink(path.join(DEST_DIR, file));
       }
+      log('blue', '✅ Diretório de destino limpo com sucesso');
     } catch (error) {
       log('yellow', '  Nenhum arquivo para limpar no diretório de destino.');
     }
     
     // Ler arquivos de origem
     const sourceFiles = await fs.readdir(SOURCE_DIR);
-    const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg'];
-    let filesCopied = 0;
     
-    log('blue', `📁 Encontrados ${sourceFiles.length} arquivos na origem...`);
+    if (sourceFiles.length === 0) {
+      log('yellow', '⚠️ Nenhum arquivo encontrado no diretório de origem');
+      return true;
+    }
+
+    log('blue', `📂 Encontrados ${sourceFiles.length} arquivos para copiar`);
     
-    // Copiar cada arquivo com nome normalizado
+    let successCount = 0;
+    
+    // Processar cada arquivo
     for (const file of sourceFiles) {
+      const sourcePath = path.join(SOURCE_DIR, file);
+      const normalizedName = normalizeFilename(file);
+      const destPath = path.join(DEST_DIR, normalizedName);
+      
       try {
-        const sourcePath = path.join(SOURCE_DIR, file);
         const stats = await fs.stat(sourcePath);
-        
         if (stats.isFile()) {
-          const ext = path.extname(file).toLowerCase();
-          
-          // Verificar se é uma imagem
-          if (imageExtensions.includes(ext)) {
-            const normalizedName = normalizeFilename(file);
-            const destPath = path.join(DEST_DIR, normalizedName);
-            
-            log('dim', `   Copiando: ${file} -> ${normalizedName}`);
-            await fs.copyFile(sourcePath, destPath);
-            filesCopied++;
-          } else {
-            log('yellow', `   Pulando arquivo não suportado: ${file}`);
-          }
+          await fs.copyFile(sourcePath, destPath);
+          log('green', `✅ Copiado: ${file} -> ${normalizedName}`);
+          successCount++;
+        } else if (stats.isDirectory()) {
+          log('yellow', `⚠️ Ignorando diretório: ${file}`);
         }
       } catch (error) {
-        log('red', `❌ Erro ao processar ${file}:`, error.message);
+        log('red', `❌ Erro ao copiar ${file}: ${error.message}`);
       }
     }
-    
-    log('green', `✅ ${filesCopied} arquivos copiados com sucesso!`);
-    return true;
+
+    if (successCount > 0) {
+      log('green', `✨ ${successCount} arquivos copiados com sucesso para ${DEST_DIR}`);
+      return true;
+    } else {
+      log('yellow', '⚠️ Nenhum arquivo foi copiado');
+      return false;
+    }
   } catch (error) {
-    log('red', '❌ Erro ao copiar assets:', error.message);
+    log('red', `❌ Erro durante a cópia de arquivos: ${error.message}`);
+    console.error(error);
     return false;
   }
 }

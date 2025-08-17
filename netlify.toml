@@ -1,5 +1,5 @@
 [build]
-  command = "node netlify-build-config.js"
+  command = "npm run build:client"
   publish = "dist/public"
   functions = "netlify/functions"
 
@@ -14,12 +14,14 @@
   to = "/index.html"
   status = 200
 
-# Configuração para arquivos estáticos
+# Configuração de cabeçalhos
 [[headers]]
-  for = "/*.html"
+  for = "/*"
   [headers.values]
-    Cache-Control = "public, max-age=0, must-revalidate"
-    Content-Type = "text/html; charset=UTF-8"
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
 
 [[headers]]
   for = "/assets/*"
@@ -32,72 +34,6 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
     Access-Control-Allow-Origin = "*"
-
-[[headers]]
-  for = "/*.js"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-    Content-Type = "application/javascript"
-
-[[headers]]
-  for = "/*.css"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000"
-    Content-Type = "text/css"
-
-[[headers]]
-  for = "/*.json"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000"
-    Content-Type = "application/json"
-
-[[headers]]
-  for = "/*.svg"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-    Content-Type = "image/svg+xml"
-
-[[headers]]
-  for = "/*.png"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-    Content-Type = "image/png"
-
-[[headers]]
-  for = "/*.jpg"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-    Content-Type = "image/jpeg"
-
-[[headers]]
-  for = "/*.webp"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-    Content-Type = "image/webp"
-
-[[headers]]
-  for = "/*.woff2"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-    Content-Type = "font/woff2"
-
-[[headers]]
-  for = "/*.woff"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-    Content-Type = "font/woff"
-
-[[headers]]
-  for = "/*.ttf"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-    Content-Type = "font/ttf"
-
-[[headers]]
-  for = "/*.eot"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-    Content-Type = "application/vnd.ms-fontobject"
 
 [[headers]]
   for = "/*.js"
@@ -125,21 +61,3 @@
 # Configuração de build plugins
 [[plugins]]
   package = "@netlify/plugin-nextjs"
-
-# Configuração de variáveis de ambiente
-[context.production.environment]
-  NODE_ENV = "production"
-
-[context.deploy-preview.environment]
-  NODE_ENV = "staging"
-
-[context.branch-deploy.environment]
-  NODE_ENV = "development"
-  node_bundler = "esbuild"
-  directory = "netlify/functions"
-  external_node_modules = ["@prisma/client"]
-
-# Configurações de otimização
-[context.production]
-  command = "npm run build"
-  environment = { NODE_ENV = "production" }

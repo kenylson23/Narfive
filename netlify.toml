@@ -1,6 +1,7 @@
 [build]
-  command = "npm run build:client"
+  command = "node netlify-build-config.js"
   publish = "dist/public"
+  functions = "netlify/functions"
 
 [build.environment]
   NODE_VERSION = "18"

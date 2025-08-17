@@ -59,5 +59,3 @@
   external_node_modules = ["@neondatabase/serverless"]
 
 # Configuração de build plugins
-[[plugins]]
-  package = "@netlify/plugin-nextjs"

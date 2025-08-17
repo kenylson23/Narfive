@@ -33,7 +33,7 @@ export default function GallerySection() {
     },
     {
       id: 3,
-      src: "/images/estudantes.jpg",
+      src: "/images/estu.jpg",
       alt: "Estudantes em Aula",
       category: "students",
       title: "Estudantes em Aula",
@@ -57,7 +57,7 @@ export default function GallerySection() {
     },
     {
       id: 6,
-      src: "/images/estudantes3.jpg",
+      src: "/images/estu3.jpg",
       alt: "Atividade em Grupo",
       category: "events",
       title: "Atividade em Grupo",

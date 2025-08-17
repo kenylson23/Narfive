@@ -1,24 +1,38 @@
 [build]
-  command = "vite build"
+  command = "npm run build:netlify"
   publish = "dist/public"
   functions = "netlify/functions"
 
 [build.environment]
-  NODE_VERSION = "18"
+  NODE_VERSION = "20"
   NPM_FLAGS = "--legacy-peer-deps"
+  NPM_TOKEN = ""
 
+# Configurações de redirecionamento
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+  force = false
 
+# Configurações de cabeçalhos de segurança
 [[headers]]
-  for = "/images/*"
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com data:; connect-src 'self' https://api.colegionarfive.ao;"
+    
+# Configurações de cache
+[[headers]]
+  for = "/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
-  for = "/assets/*"
+  for = "/*.css"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
@@ -27,15 +41,60 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-[[headers]]
-  for = "/*.css"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000"
+# Configurações de redirecionamento para SPA
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false
 
+# Configurações de formulários
 [[headers]]
-  for = "/*.html"
+  for = "/api/*"
   [headers.values]
-    Cache-Control = "public, max-age=0, must-revalidate"
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, POST, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type, Authorization"
 
+# Configurações de ambiente
+[context.production.environment]
+  NODE_ENV = "production"
+  VITE_API_URL = "https://api.colegionarfive.ao"
+
+[context.deploy-preview.environment]
+  NODE_ENV = "staging"
+  VITE_API_URL = "https://staging-api.colegionarfive.ao"
+
+[context.branch-deploy.environment]
+  NODE_ENV = "development"
+  VITE_API_URL = "https://dev-api.colegionarfive.ao"
+
+# Configurações de build
+[build.processing]
+  skip_processing = false
+  
+[build.processing.html]
+  pretty_urls = true
+  
+[build.processing.css]
+  bundle = true
+  minify = true
+  
+[build.processing.js]
+  bundle = true
+  minify = true
+  
+[build.processing.images]
+  compress = true
+
+# Configurações de deploy contínuo
+[context.production.environment]
+  NEXT_TELEMETRY_DISABLED = "1"
+  NPM_FLAGS = "--legacy-peer-deps"
+  NODE_OPTIONS = "--max_old_space_size=4096"
+
+# Configurações de build do Node.js
 [functions]
-  directory = "netlify/functions"
+  node_bundler = "esbuild"
+  external_node_modules = ["@prisma/client", "@prisma/adapter-pg"]
+  included_files = ["prisma/**"]

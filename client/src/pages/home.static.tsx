@@ -38,13 +38,13 @@ export default function Home() {
         <meta property="og:title" content="Colégio Narfive - Educação de Excelência em Angola" />
         <meta property="og:description" content="Formando líderes para o futuro através da inovação, conhecimento e valores sólidos." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://colegionarfive.netlify.app" />
+        <meta property="og:url" content="http://localhost:8080" />
         <meta property="og:image" content="https://images.unsplash.com/photo-1580582932707-520aed937b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=630" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Colégio Narfive - Educação de Excelência em Angola" />
         <meta name="twitter:description" content="Formando líderes para o futuro através da inovação, conhecimento e valores sólidos." />
         <meta name="twitter:image" content="https://images.unsplash.com/photo-1580582932707-520aed937b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=630" />
-        <link rel="canonical" href="https://colegionarfive.netlify.app" />
+        <link rel="canonical" href="http://localhost:8080" />
       </Helmet>
       
       <div className="min-h-screen bg-background text-foreground">

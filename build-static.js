@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-// Build script for static deployment on Netlify
+// Build script for static deployment
 import { build } from 'vite';
 import { fileURLToPath } from 'url';
 import { dirname, resolve } from 'path';
@@ -53,7 +53,7 @@ try {
   
   console.log('✅ Static build completed successfully!');
   console.log('📁 Files generated in: dist/public');
-  console.log('🎯 Ready for Netlify deployment!');
+  console.log('🎯 Ready for deployment!');
   
 } catch (error) {
   console.error('❌ Build failed:', error);

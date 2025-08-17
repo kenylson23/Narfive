@@ -12,9 +12,12 @@ export default defineConfig({
     },
   },
   root: path.resolve(__dirname, "client"),
+  base: '/',
   build: {
     outDir: path.resolve(__dirname, "dist/public"),
     emptyOutDir: true,
+    assetsDir: 'assets',
+    assetsInlineLimit: 0, // Garante que as imagens não sejam convertidas para base64
     rollupOptions: {
       input: {
         main: path.resolve(__dirname, "client/index.html"),
@@ -28,21 +31,52 @@ export default defineConfig({
           icons: ['lucide-react'],
           form: ['react-hook-form', '@hookform/resolvers'],
           utils: ['clsx', 'tailwind-merge', 'class-variance-authority']
-        }
+        },
+        assetFileNames: (assetInfo) => {
+          const ext = assetInfo.name?.split('.').pop()?.toLowerCase();
+          if (!ext) return 'assets/[name][extname]';
+          
+          if (['png', 'jpg', 'jpeg', 'gif', 'svg', 'webp'].includes(ext)) {
+            return 'assets/images/[name][extname]';
+          }
+          
+          if (['css'].includes(ext)) {
+            return 'assets/css/[name]-[hash][extname]';
+          }
+          
+          return 'assets/[name][extname]';
+        },
+        chunkFileNames: 'assets/js/[name]-[hash].js',
+        entryFileNames: 'assets/js/[name]-[hash].js',
       }
     },
     target: 'es2020',
     minify: 'terser',
     sourcemap: false,
     cssCodeSplit: true,
-    chunkSizeWarningLimit: 600,
+    chunkSizeWarningLimit: 1000, // Aumentado para evitar avisos em builds grandes
   },
   optimizeDeps: {
-    include: ['react', 'react-dom', 'framer-motion', '@tanstack/react-query']
+    include: ['react', 'react-dom', 'framer-motion', '@tanstack/react-query'],
+    esbuildOptions: {
+      target: 'es2020',
+      supported: { 
+        bigint: true 
+      },
+    },
   },
   server: {
     fs: {
       strict: false,
     },
+    hmr: {
+      protocol: 'ws',
+      host: 'localhost',
+      port: 3000,
+    },
+  },
+  preview: {
+    port: 3000,
+    strictPort: true,
   },
 });

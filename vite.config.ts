@@ -18,27 +18,22 @@ export default defineConfig(({ mode }) => ({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
-    assetsDir: '.', // Mantém a estrutura de pastas original
+    assetsDir: 'assets',
     rollupOptions: {
       output: {
-        // Mantém a estrutura de pastas original para os assets
         assetFileNames: (assetInfo) => {
-          // Extrai o caminho relativo a partir da pasta public
-          const relativePath = path.relative(
-            path.resolve(import.meta.dirname, "client", "public"),
-            assetInfo.name
-          );
-          // Remove o hash para manter os nomes originais
-          const dirName = path.dirname(relativePath);
-          const extName = path.extname(relativePath);
-          const baseName = path.basename(relativePath, extName);
+          const ext = assetInfo.name?.split('.').pop()?.toLowerCase();
+          if (!ext) return 'assets/[name]-[hash][extname]';
           
-          // Se estiver na pasta images, mantém a estrutura
-          if (dirName.startsWith('images') || dirName === 'images') {
-            return `images/${baseName}${extName}`;
+          if (['png', 'jpg', 'jpeg', 'gif', 'svg', 'webp'].includes(ext)) {
+            return 'assets/images/[name]-[hash][extname]';
           }
           
-          return `${baseName}${extName}`;
+          if (['css'].includes(ext)) {
+            return 'assets/css/[name]-[hash][extname]';
+          }
+          
+          return 'assets/[name]-[hash][extname]';
         },
         chunkFileNames: 'assets/js/[name]-[hash].js',
         entryFileNames: 'assets/js/[name]-[hash].js',

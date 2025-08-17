@@ -17,7 +17,7 @@ export default function GallerySection() {
   const images = [
     {
       id: 1,
-      src: "/images/acampamento3.jpg",
+      src: "/assets/images/Acampamento 3.jpg",
       alt: "Acampamento Escolar 1",
       category: "campus",
       title: "Acampamento Escolar",
@@ -25,7 +25,7 @@ export default function GallerySection() {
     },
     {
       id: 2,
-      src: "/images/desporto1.jpg",
+      src: "/assets/images/Desporto1 .jpg",
       alt: "Competição Desportiva",
       category: "events",
       title: "Competição Desportiva",
@@ -33,7 +33,7 @@ export default function GallerySection() {
     },
     {
       id: 3,
-      src: "/images/estudantes.jpg",
+      src: "/assets/images/estudantes.jpg",
       alt: "Estudantes em Aula",
       category: "students",
       title: "Estudantes em Aula",
@@ -41,7 +41,7 @@ export default function GallerySection() {
     },
     {
       id: 4,
-      src: "/images/infa3.jpg",
+      src: "/assets/images/Infa3.jpg",
       alt: "Momentos de Fraternidade",
       category: "Fraternidade",
       title: "Momentos de Fraternidade",
@@ -49,7 +49,7 @@ export default function GallerySection() {
     },
     {
       id: 5,
-      src: "/images/jornada5.jpg",
+      src: "/assets/images/Jornada5.jpg",
       alt: "Jornada de Convivência",
       category: "Fraternidade",
       title: "Jornada de Convivência",
@@ -57,7 +57,7 @@ export default function GallerySection() {
     },
     {
       id: 6,
-      src: "/images/estudantes3.jpg",
+      src: "/assets/images/estudantes3.jpg",
       alt: "Atividade em Grupo",
       category: "events",
       title: "Atividade em Grupo",
@@ -65,7 +65,7 @@ export default function GallerySection() {
     },
     {
       id: 7,
-      src: "/images/dg2.jpg",
+      src: "/assets/images/DG2.jpg",
       alt: "Encontro de Gerações",
       category: "Fraternidade",
       title: "Encontro de Gerações",
@@ -73,7 +73,7 @@ export default function GallerySection() {
     },
     {
       id: 8,
-      src: "/images/jornada2.jpg",
+      src: "/assets/images/Jornada2.jpg",
       alt: "Jornada Científica",
       category: "students",
       title: "Jornada Científica",
@@ -81,7 +81,7 @@ export default function GallerySection() {
     },
     {
       id: 9,
-      src: "/images/acampamento6.jpg",
+      src: "/assets/images/Acampamento 6.jpg",
       alt: "Acampamento Escolar 2",
       category: "campus",
       title: "Momento de Lazer",

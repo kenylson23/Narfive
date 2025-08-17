@@ -94,7 +94,7 @@ export default function AboutSection() {
           >
             <div className="relative">
               <motion.img 
-                src="/images/instalacoes.jpg" 
+                src="/assets/images/instalacoes.jpg" 
                 alt="Instalações do Colégio Narfive" 
                 className="rounded-2xl shadow-2xl w-full h-auto section-transition object-cover"
                 whileHover={{ 

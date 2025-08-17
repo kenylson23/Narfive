@@ -4,11 +4,15 @@
  * Script para copiar assets estáticos (imagens) para o diretório público antes do build
  */
 
-const fs = require('fs');
-const path = require('path');
-const { promisify } = require('util');
-const ncp = promisify(require('ncp').ncp);
-const { exec } = require('child_process');
+import { promises as fs } from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import ncp from 'ncp';
+import { promisify } from 'util';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const ncpCopy = promisify(ncp);
 
 // Configurações
 const SOURCE_DIR = path.resolve(__dirname, '../attached_assets');
@@ -49,11 +53,21 @@ function log(color, ...args) {
 // Função para garantir que um diretório existe
 async function ensureDir(dir) {
   try {
-    await fs.promises.mkdir(dir, { recursive: true });
+    await fs.mkdir(dir, { recursive: true });
     log('green', `✓ Diretório criado/verificado: ${dir}`);
     return true;
   } catch (error) {
     log('red', `✗ Erro ao criar diretório ${dir}:`, error.message);
+    return false;
+  }
+}
+
+// Função para verificar se um arquivo ou diretório existe
+async function pathExists(path) {
+  try {
+    await fs.access(path);
+    return true;
+  } catch (error) {
     return false;
   }
 }
@@ -64,7 +78,7 @@ async function copyFiles() {
     log('blue', '\n🚀 Iniciando cópia de assets...');
     
     // Verificar se o diretório de origem existe
-    if (!fs.existsSync(SOURCE_DIR)) {
+    if (!await pathExists(SOURCE_DIR)) {
       log('yellow', `⚠️  Diretório de origem não encontrado: ${SOURCE_DIR}`);
       log('yellow', '  Pulando cópia de assets...');
       return true;
@@ -79,25 +93,33 @@ async function copyFiles() {
     log('cyan', `📁 Copiando arquivos de ${SOURCE_DIR} para ${DEST_DIR}...`);
     
     // Usar ncp para copiar recursivamente
-    await ncp(SOURCE_DIR, DEST_DIR, {
+    await ncpCopy(SOURCE_DIR, DEST_DIR, {
       stopOnErr: true,
-      filter: (source) => {
-        // Incluir apenas arquivos de imagem
-        const ext = path.extname(source).toLowerCase();
-        const isImage = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg'].includes(ext);
-        
-        // Se for diretório, incluir
-        if (fs.existsSync(source) && fs.lstatSync(source).isDirectory()) {
-          return true;
+      filter: async (source) => {
+        try {
+          const stats = await fs.stat(source);
+          
+          // Se for diretório, incluir
+          if (stats.isDirectory()) {
+            return true;
+          }
+          
+          // Verificar extensão do arquivo
+          const ext = path.extname(source).toLowerCase();
+          const isImage = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg'].includes(ext);
+          
+          // Se for arquivo de imagem, copiar
+          if (isImage) {
+            const relativePath = path.relative(process.cwd(), source);
+            log('dim', `  Copiando: ${relativePath}`);
+            return true;
+          }
+          
+          return false;
+        } catch (error) {
+          log('red', `❌ Erro ao processar ${source}:`, error.message);
+          return false;
         }
-        
-        // Se for arquivo, verificar se é imagem
-        if (isImage) {
-          log('dim', `  Copiando: ${path.relative(process.cwd(), source)}`);
-          return true;
-        }
-        
-        return false;
       }
     });
 
@@ -111,6 +133,11 @@ async function copyFiles() {
 
 // Executar
 (async () => {
-  const success = await copyFiles();
-  process.exit(success ? 0 : 1);
+  try {
+    const success = await copyFiles();
+    process.exit(success ? 0 : 1);
+  } catch (error) {
+    console.error('❌ Erro inesperado:', error);
+    process.exit(1);
+  }
 })();

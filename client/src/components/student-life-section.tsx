@@ -30,15 +30,15 @@ export default function StudentLifeSection() {
 
   const eventImages = [
     {
-      src: "/assets/images/Solida.jpg",
+      src: "/images/solida.jpg",
       alt: "Ação Solidária"
     },
     {
-      src: "/assets/images/TV.jpg",
+      src: "/images/tv.jpg",
       alt: "Entrevista na TV"
     },
     {
-      src: "/assets/images/Acampamento 2.jpg",
+      src: "/images/acampamento2.jpg",
       alt: "Acampamento Escolar"
     }
   ];
@@ -70,8 +70,8 @@ export default function StudentLifeSection() {
             viewport={{ once: true }}
           >
             <motion.img 
-              src="/images/Jornada1.jpg" 
-              alt="Jornada Científica" 
+              src="/images/jornada1.jpg" 
+              alt="Atividades extracurriculares" 
               className="rounded-2xl shadow-2xl w-full h-auto object-cover"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
@@ -117,8 +117,8 @@ export default function StudentLifeSection() {
             viewport={{ once: true }}
           >
             <motion.img 
-              src="/images/Desporto2.jpg" 
-              alt="Complexo Desportivo" 
+              src="/images/desporto2.jpg" 
+              alt="Instalações modernas" 
               className="rounded-2xl shadow-2xl w-full h-auto object-cover"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}

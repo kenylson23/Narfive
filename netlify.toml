@@ -13,17 +13,17 @@
   to = "/index.html"
   status = 200
   force = false
-
-# Redirecionamento para imagens antigas
+  
+# Garantir que as imagens não sejam redirecionadas para o index.html
 [[redirects]]
   from = "/images/*"
-  to = "/assets/images/:splat"
+  to = "/images/:splat"
   status = 200
-  force = true
+  force = false
 
-# Cabeçalhos para assets
+# Cabeçalhos para imagens
 [[headers]]
-  for = "/assets/**"
+  for = "/images/*"
   [headers.values]
     Access-Control-Allow-Origin = "*"
     Cache-Control = "public, max-age=31536000, immutable"

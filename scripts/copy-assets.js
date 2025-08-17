@@ -2,6 +2,7 @@
 
 /**
  * Script para copiar assets estáticos (imagens) para o diretório público antes do build
+ * Normaliza nomes de arquivos para evitar problemas com espaços e case sensitivity
  */
 
 import { promises as fs } from 'fs';
@@ -17,6 +18,28 @@ const ncpCopy = promisify(ncp);
 // Configurações
 const SOURCE_DIR = path.resolve(__dirname, '../attached_assets');
 const DEST_DIR = path.resolve(__dirname, '../client/public/images');
+
+// Mapeamento de nomes de arquivos para normalização
+const FILE_MAPPING = {
+  'Desporto1 .jpg': 'desporto1.jpg',
+  'Desporto1.jpg': 'desporto1.jpg',
+  'Desporto2.jpg': 'desporto2.jpg',
+  'Jornada1.jpg': 'jornada1.jpg',
+  'Jornada2.jpg': 'jornada2.jpg',
+  'Jornada5.jpg': 'jornada5.jpg',
+  'Acampamento 2.jpg': 'acampamento2.jpg',
+  'Acampamento 3.jpg': 'acampamento3.jpg',
+  'Acampamento 6.jpg': 'acampamento6.jpg',
+  'Solida.jpg': 'solida.jpg',
+  'TV.jpg': 'tv.jpg',
+  'Infa3.jpg': 'infa3.jpg',
+  'DG2.jpg': 'dg2.jpg',
+  'estu.jpg': 'estu.jpg',
+  'estu 3.jpg': 'estu3.jpg',
+  'Instalações.jpg': 'instalacoes.jpg',
+  'instalacoes.jpg': 'instalacoes.jpg',
+  'instalacoes-virtual-tour.jpg': 'instalacoes-virtual-tour.jpg'
+};
 
 // Cores para o console
 const colors = {
@@ -72,6 +95,20 @@ async function pathExists(path) {
   }
 }
 
+// Função para normalizar nome do arquivo
+function normalizeFilename(filename) {
+  // Remover espaços extras e converter para minúsculas
+  const normalized = filename
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
+  
+  // Usar mapeamento personalizado se existir
+  return FILE_MAPPING[filename] || normalized;
+}
+
 // Função para copiar arquivos
 async function copyFiles() {
   try {
@@ -88,42 +125,52 @@ async function copyFiles() {
     if (!(await ensureDir(DEST_DIR))) {
       return false;
     }
-
-    // Copiar arquivos
-    log('cyan', `📁 Copiando arquivos de ${SOURCE_DIR} para ${DEST_DIR}...`);
     
-    // Usar ncp para copiar recursivamente
-    await ncpCopy(SOURCE_DIR, DEST_DIR, {
-      stopOnErr: true,
-      filter: async (source) => {
-        try {
-          const stats = await fs.stat(source);
-          
-          // Se for diretório, incluir
-          if (stats.isDirectory()) {
-            return true;
-          }
-          
-          // Verificar extensão do arquivo
-          const ext = path.extname(source).toLowerCase();
-          const isImage = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg'].includes(ext);
-          
-          // Se for arquivo de imagem, copiar
-          if (isImage) {
-            const relativePath = path.relative(process.cwd(), source);
-            log('dim', `  Copiando: ${relativePath}`);
-            return true;
-          }
-          
-          return false;
-        } catch (error) {
-          log('red', `❌ Erro ao processar ${source}:`, error.message);
-          return false;
-        }
+    // Limpar diretório de destino
+    log('yellow', '🔄 Limpando diretório de destino...');
+    try {
+      const files = await fs.readdir(DEST_DIR);
+      for (const file of files) {
+        await fs.unlink(path.join(DEST_DIR, file));
       }
-    });
-
-    log('green', '✅ Assets copiados com sucesso!');
+    } catch (error) {
+      log('yellow', '  Nenhum arquivo para limpar no diretório de destino.');
+    }
+    
+    // Ler arquivos de origem
+    const sourceFiles = await fs.readdir(SOURCE_DIR);
+    const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg'];
+    let filesCopied = 0;
+    
+    log('blue', `📁 Encontrados ${sourceFiles.length} arquivos na origem...`);
+    
+    // Copiar cada arquivo com nome normalizado
+    for (const file of sourceFiles) {
+      try {
+        const sourcePath = path.join(SOURCE_DIR, file);
+        const stats = await fs.stat(sourcePath);
+        
+        if (stats.isFile()) {
+          const ext = path.extname(file).toLowerCase();
+          
+          // Verificar se é uma imagem
+          if (imageExtensions.includes(ext)) {
+            const normalizedName = normalizeFilename(file);
+            const destPath = path.join(DEST_DIR, normalizedName);
+            
+            log('dim', `   Copiando: ${file} -> ${normalizedName}`);
+            await fs.copyFile(sourcePath, destPath);
+            filesCopied++;
+          } else {
+            log('yellow', `   Pulando arquivo não suportado: ${file}`);
+          }
+        }
+      } catch (error) {
+        log('red', `❌ Erro ao processar ${file}:`, error.message);
+      }
+    }
+    
+    log('green', `✅ ${filesCopied} arquivos copiados com sucesso!`);
     return true;
   } catch (error) {
     log('red', '❌ Erro ao copiar assets:', error.message);

@@ -12,7 +12,7 @@ export default function VirtualTourSection() {
       id: 1,
       name: "Entrada Principal",
       description: "Portão principal do Colégio Narfive com vista para a recepção",
-      image: "/assets/images/instalacoes-virtual-tour.jpg",
+      image: "/images/instalacoes.jpg",
       hotspots: [
         { x: 30, y: 40, label: "Recepção", target: 1 },
         { x: 70, y: 60, label: "Pátio Central", target: 2 }

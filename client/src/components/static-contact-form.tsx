@@ -36,8 +36,8 @@ export default function StaticContactForm() {
 
     // Simulate form submission for static deployment
     try {
-      // In a real static deployment, you would use a service like Netlify Forms,
-      // Formspree, or similar to handle form submissions
+      // In a real deployment, you would use a form handling service
+      // or API endpoint to process the form submission
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       toast({

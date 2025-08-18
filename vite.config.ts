@@ -2,7 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 
-export default defineConfig(({ mode }) => ({
+export default defineConfig(() => ({
   plugins: [
     react(),
   ],
@@ -19,23 +19,23 @@ export default defineConfig(({ mode }) => ({
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
     assetsDir: 'assets',
-    assetsInlineLimit: 0, // Garante que as imagens não sejam convertidas para base64
+    copyPublicDir: true,
     rollupOptions: {
+      input: path.resolve(import.meta.dirname, "client/index.html"),
       output: {
         assetFileNames: (assetInfo) => {
-          const ext = assetInfo.name?.split('.').pop()?.toLowerCase();
-          if (!ext) return 'assets/[name][extname]';
+          const info = assetInfo.name?.split('.') || [];
+          const ext = info[info.length - 1];
           
-          if (['png', 'jpg', 'jpeg', 'gif', 'svg', 'webp'].includes(ext)) {
-            // Mantém o nome original do arquivo para facilitar a referência
-            return 'assets/images/[name][extname]';
+          if (['png', 'jpe?g', 'gif', 'svg', 'webp', 'avif'].includes(ext)) {
+            return `images/[name][extname]`;
           }
           
-          if (['css'].includes(ext)) {
+          if (ext === 'css') {
             return 'assets/css/[name]-[hash][extname]';
           }
           
-          return 'assets/[name][extname]';
+          return 'assets/[name]-[hash][extname]';
         },
         chunkFileNames: 'assets/js/[name]-[hash].js',
         entryFileNames: 'assets/js/[name]-[hash].js',

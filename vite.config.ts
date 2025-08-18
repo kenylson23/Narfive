@@ -14,8 +14,8 @@ export default defineConfig(() => ({
   root: path.resolve(import.meta.dirname, "client"),
   base: '/',
   build: {
-    outDir: path.resolve(import.meta.dirname, "build"),
-    emptyOutDir: true,
+    outDir: path.resolve(import.meta.dirname, "dist"),
+    emptyOutDir: false,
     assetsDir: 'assets',
     copyPublicDir: true,
     rollupOptions: {

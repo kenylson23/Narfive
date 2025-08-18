@@ -2,26 +2,24 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 
-export default defineConfig({
+export default defineConfig(() => ({
   plugins: [react()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "client", "src"),
-      "@shared": path.resolve(__dirname, "shared"),
-      "@assets": path.resolve(__dirname, "attached_assets"),
+      "@": path.resolve(import.meta.dirname, "client", "src"),
+      "@shared": path.resolve(import.meta.dirname, "shared"),
+      "@assets": path.resolve(import.meta.dirname, "attached_assets"),
     },
   },
-  root: path.resolve(__dirname, "client"),
+  root: path.resolve(import.meta.dirname, "client"),
   base: '/',
   build: {
-    outDir: path.resolve(__dirname, "dist/public"),
+    outDir: path.resolve(import.meta.dirname, "build"),
     emptyOutDir: true,
     assetsDir: 'assets',
-    assetsInlineLimit: 0, // Garante que as imagens não sejam convertidas para base64
+    copyPublicDir: true,
     rollupOptions: {
-      input: {
-        main: path.resolve(__dirname, "client/index.html"),
-      },
+      input: path.resolve(import.meta.dirname, "client/index.html"),
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
@@ -33,18 +31,18 @@ export default defineConfig({
           utils: ['clsx', 'tailwind-merge', 'class-variance-authority']
         },
         assetFileNames: (assetInfo) => {
-          const ext = assetInfo.name?.split('.').pop()?.toLowerCase();
-          if (!ext) return 'assets/[name][extname]';
+          const info = assetInfo.name?.split('.') || [];
+          const ext = info[info.length - 1];
           
-          if (['png', 'jpg', 'jpeg', 'gif', 'svg', 'webp'].includes(ext)) {
-            return 'assets/images/[name][extname]';
+          if (['png', 'jpg', 'jpeg', 'gif', 'svg', 'webp', 'avif'].includes(ext)) {
+            return 'assets/images/[name]-[hash][extname]';
           }
           
-          if (['css'].includes(ext)) {
+          if (ext === 'css') {
             return 'assets/css/[name]-[hash][extname]';
           }
           
-          return 'assets/[name][extname]';
+          return 'assets/[name]-[hash][extname]';
         },
         chunkFileNames: 'assets/js/[name]-[hash].js',
         entryFileNames: 'assets/js/[name]-[hash].js',
@@ -54,29 +52,14 @@ export default defineConfig({
     minify: 'terser',
     sourcemap: false,
     cssCodeSplit: true,
-    chunkSizeWarningLimit: 1000, // Aumentado para evitar avisos em builds grandes
+    chunkSizeWarningLimit: 600,
   },
   optimizeDeps: {
-    include: ['react', 'react-dom', 'framer-motion', '@tanstack/react-query'],
-    esbuildOptions: {
-      target: 'es2020',
-      supported: { 
-        bigint: true 
-      },
-    },
+    include: ['react', 'react-dom', 'framer-motion', '@tanstack/react-query']
   },
   server: {
     fs: {
       strict: false,
     },
-    hmr: {
-      protocol: 'ws',
-      host: 'localhost',
-      port: 3000,
-    },
   },
-  preview: {
-    port: 3000,
-    strictPort: true,
-  },
-});
+}));

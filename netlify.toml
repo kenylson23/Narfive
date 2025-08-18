@@ -1,17 +1,10 @@
 [build]
   command = "npm run build"
-  publish = "dist/public"
+  publish = "build"
 
 [build.environment]
   NODE_VERSION = "20"
   NPM_FLAGS = "--legacy-peer-deps"
-
-# Configurações de redirecionamento
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-  force = false
 
 # Configurações de cabeçalhos de segurança
 [[headers]]
@@ -56,20 +49,6 @@
 [context.branch-deploy.environment]
   NODE_ENV = "development"
 
-# Configurações de build
+# Configurações de build (Vite já faz o processamento)
 [build.processing]
-  skip_processing = false
-  
-[build.processing.html]
-  pretty_urls = true
-  
-[build.processing.css]
-  bundle = true
-  minify = true
-  
-[build.processing.js]
-  bundle = true
-  minify = true
-  
-[build.processing.images]
-  compress = true
+  skip_processing = true

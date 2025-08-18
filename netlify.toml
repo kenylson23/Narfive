@@ -1,12 +1,10 @@
 [build]
-  command = "npm run build:netlify"
+  command = "npm run build"
   publish = "dist/public"
-  functions = "netlify/functions"
 
 [build.environment]
   NODE_VERSION = "20"
   NPM_FLAGS = "--legacy-peer-deps"
-  NPM_TOKEN = ""
 
 # Configurações de redirecionamento
 [[redirects]]
@@ -48,26 +46,15 @@
   status = 200
   force = false
 
-# Configurações de formulários
-[[headers]]
-  for = "/api/*"
-  [headers.values]
-    Access-Control-Allow-Origin = "*"
-    Access-Control-Allow-Methods = "GET, POST, OPTIONS"
-    Access-Control-Allow-Headers = "Content-Type, Authorization"
-
-# Configurações de ambiente
+# Configurações de ambiente para static site
 [context.production.environment]
   NODE_ENV = "production"
-  VITE_API_URL = "https://api.colegionarfive.ao"
 
 [context.deploy-preview.environment]
   NODE_ENV = "staging"
-  VITE_API_URL = "https://staging-api.colegionarfive.ao"
 
 [context.branch-deploy.environment]
   NODE_ENV = "development"
-  VITE_API_URL = "https://dev-api.colegionarfive.ao"
 
 # Configurações de build
 [build.processing]
@@ -86,15 +73,3 @@
   
 [build.processing.images]
   compress = true
-
-# Configurações de deploy contínuo
-[context.production.environment]
-  NEXT_TELEMETRY_DISABLED = "1"
-  NPM_FLAGS = "--legacy-peer-deps"
-  NODE_OPTIONS = "--max_old_space_size=4096"
-
-# Configurações de build do Node.js
-[functions]
-  node_bundler = "esbuild"
-  external_node_modules = ["@prisma/client", "@prisma/adapter-pg"]
-  included_files = ["prisma/**"]

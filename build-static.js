@@ -4,7 +4,7 @@
 import { build } from 'vite';
 import { fileURLToPath } from 'url';
 import { dirname, resolve } from 'path';
-import { copyFileSync, existsSync, mkdirSync, writeFileSync } from 'fs';
+import { existsSync, mkdirSync, writeFileSync } from 'fs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -14,7 +14,7 @@ console.log('🚀 Building static files for deployment...');
 try {
   // Use the static configuration
   await build({
-    configFile: resolve(__dirname, 'vite.config.static.ts'),
+    configFile: resolve(__dirname, 'vite.config.ts'),
     mode: 'production',
     build: {
       outDir: resolve(__dirname, 'dist/public'),
